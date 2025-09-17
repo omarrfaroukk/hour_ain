@@ -44,12 +44,9 @@ class _SignInState extends State<SignIn> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image(
-                        image: AssetImage(AppImages.applogo),
-                        height: 120,
-                      ),
+                    Image(
+                      image: AssetImage(AppImages.applogo),
+                      height: 200,
                     ),
                     Container(
                       height: 400,
