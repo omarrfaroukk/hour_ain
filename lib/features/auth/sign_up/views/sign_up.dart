@@ -44,133 +44,196 @@ class _SignUpState extends State<SignUp> {
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  height: 600,
-                  width: 360,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: AppColors.transparentColor,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.pushNamed(
-                                    context,
-                                    AppRoutes.signin,
-                                  );
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: CustomAuthButton(
-                                    txt: "Sign In",
-                                    bgcolor: AppColors.whiteColor,
-                                    txtColor: AppColors.primaryColor,
-                                  ),
-                                ),
-                              ),
-
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: CustomAuthButton(
-                                  bgcolor: AppColors.primaryColor,
-                                  txtColor: AppColors.whiteColor,
-                                  txt: "Sign Up",
-                                ),
-                              ),
-                            ],
-                          ),
-                          CustomTextfield(
-                            mycontroller: _usernamecont,
-                            label: "Username: ",
-                          ),
-                          CustomTextfield(
-                            mycontroller: _phonenumbercont,
-                            label: "Phone Number: ",
-                          ),
-
-                          CustomTextfield(
-                            mycontroller: _emailcont,
-                            label: "Email: ",
-                          ),
-                          CustomTextfield(
-                            mycontroller: _passwordcont,
-                            label: "Password: ",
-                          ),
-                          CustomTextfield(
-                            mycontroller: _confirmpasswordcont,
-                            label: "Confirm Password: ",
-                          ),
-
-                          BlocListener<SignUpCubit, SignUpState>(
-                            listener: (context, state) {
-                              if (state is SignUpSuccessful) {
-                                Navigator.pushReplacementNamed(
-                                  context,
-                                  '/home',
-                                );
-                              }
-                            },
-                            child: Builder(
-                              // Added Builder to wrap the state-based widget
-                              builder: (context) {
-                                final state = context
-                                    .watch<SignUpCubit>()
-                                    .state;
-                                if (state is SignUpInitial) {
-                                  return JoinButton(
-                                    ontap: () {
-                                      context.read<SignUpCubit>().signup(
-                                        _emailcont.text,
-                                        _passwordcont.text,
-                                        int.parse(_phonenumbercont.text),
-                                        _usernamecont.text,
-                                      );
-                                    },
-                                    ch: Center(
-                                      child: Text(
-                                        "Sign Up",
-                                        style: AppTypography.body1.merge(
-                                          GoogleFonts.poppins(),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image(
+                        image: AssetImage(AppImages.applogo),
+                        height: 200,
+                      ),
+                      Container(
+                        height: 600,
+                        width: 360,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: AppColors.transparentColor,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                          context,
+                                          AppRoutes.signin,
+                                        );
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: CustomAuthButton(
+                                          txt: "Sign In",
+                                          bgcolor: AppColors.whiteColor,
+                                          txtColor: AppColors.primaryColor,
                                         ),
                                       ),
                                     ),
-                                  );
-                                }
-                                if (state is SignUpLoading) {
-                                  return Center(
-                                    child: SpinKitThreeInOut(
-                                      size: 22,
-                                      color: AppColors.primaryColor,
-                                    ),
-                                  );
-                                }
-                                return JoinButton(
-                                  ontap: () {},
-                                  ch: Center(
-                                    child: Text(
-                                      "Sign In",
-                                      style: AppTypography.body1.merge(
-                                        GoogleFonts.poppins(),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: CustomAuthButton(
+                                        bgcolor: AppColors.primaryColor,
+                                        txtColor: AppColors.whiteColor,
+                                        txt: "Sign Up",
                                       ),
                                     ),
+                                  ],
+                                ),
+                                CustomTextfield(
+                                  mycontroller: _usernamecont,
+                                  label: "Display Name: ",
+                                  val: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Display name is required";
+                                    }
+                                    if (value.length < 3) {
+                                      return "Display name must be at least 3 characters";
+                                    }
+                                    if (!RegExp(r'^[a-zA-Z0-9_ ]+$')
+                                        .hasMatch(value)) {
+                                      return "Only letters, numbers, spaces, and underscores are allowed";
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                CustomTextfield(
+                                  mycontroller: _phonenumbercont,
+                                  label: "Phone Number: ",
+                                  val: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Phone number is required";
+                                    }
+
+                                    if (!RegExp(r'^\d{10,15}$')
+                                        .hasMatch(value)) {
+                                      return "Enter a valid phone number";
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                CustomTextfield(
+                                  mycontroller: _emailcont,
+                                  label: "Email: ",
+                                  val: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Email is required";
+                                    }
+                                    // Simple email regex
+                                    String pattern =
+                                        r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
+                                    RegExp regex = RegExp(pattern);
+                                    if (!regex.hasMatch(value)) {
+                                      return "Enter a valid email address";
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                CustomTextfield(
+                                  mycontroller: _passwordcont,
+                                  label: "Password: ",
+                                  val: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Password is required";
+                                    }
+                                    if (value.length < 8) {
+                                      return "Password must be at least 8 characters long";
+                                    }
+                                    if (!RegExp(r'[A-Z]').hasMatch(value)) {
+                                      return "Password must contain at least one uppercase letter";
+                                    }
+                                    if (!RegExp(r'[0-9]').hasMatch(value)) {
+                                      return "Password must contain at least one number";
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                CustomTextfield(
+                                  mycontroller: _confirmpasswordcont,
+                                  label: "Confirm Password: ",
+                                ),
+                                BlocListener<SignUpCubit, SignUpState>(
+                                  listener: (context, state) {
+                                    if (state is SignUpSuccessful) {
+                                      Navigator.pushReplacementNamed(
+                                        context,
+                                        '/home',
+                                      );
+                                    }
+                                  },
+                                  child: Builder(
+                                    // Added Builder to wrap the state-based widget
+                                    builder: (context) {
+                                      final state =
+                                          context.watch<SignUpCubit>().state;
+                                      if (state is SignUpInitial) {
+                                        return JoinButton(
+                                          ontap: () {
+                                            if (_formkey.currentState!
+                                                .validate()) {
+                                              context
+                                                  .read<SignUpCubit>()
+                                                  .signup(
+                                                    _emailcont.text,
+                                                    _passwordcont.text,
+                                                    int.parse(
+                                                        _phonenumbercont.text),
+                                                    _usernamecont.text,
+                                                  );
+                                            }
+                                          },
+                                          ch: Center(
+                                            child: Text(
+                                              "Sign Up",
+                                              style: AppTypography.body1.merge(
+                                                GoogleFonts.poppins(),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      if (state is SignUpLoading) {
+                                        return Center(
+                                          child: SpinKitThreeInOut(
+                                            size: 22,
+                                            color: AppColors.primaryColor,
+                                          ),
+                                        );
+                                      }
+                                      return JoinButton(
+                                        ontap: () {},
+                                        ch: Center(
+                                          child: Text(
+                                            "Sign In",
+                                            style: AppTypography.body1.merge(
+                                              GoogleFonts.poppins(),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
                                   ),
-                                );
-                              },
+                                ),
+                              ],
                             ),
                           ),
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                ),
+                    ]),
               ),
             ),
           ),

@@ -49,6 +49,24 @@ class CustomTextfield extends StatelessWidget {
                   color: AppColors.primaryColor,
                 ),
               ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+                borderSide: BorderSide(
+                  width: 1.3,
+                  color: Colors.red,
+                ),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+                borderSide: BorderSide(
+                  width:2.5,
+                  color: Colors.red,
+                ),
+              ),
+              errorStyle: AppTypography.caption1.copyWith(
+                color: Colors.red,
+                fontWeight: FontWeight.bold,
+              ),
               filled: true,
               fillColor: AppColors.transparentwo,
             ),

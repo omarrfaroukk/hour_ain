@@ -24,7 +24,7 @@ class OnBoarding extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Image(image: AssetImage(AppImages.applogo), height: 150),
+                Image(image: AssetImage(AppImages.applogo), height: 200),
                 Text(
                   textAlign: TextAlign.center,
                   "Look awesome & Save Some ",
