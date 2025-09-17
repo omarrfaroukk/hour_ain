@@ -4,7 +4,7 @@ import 'package:hour_ain/features/auth/sign_in/views/sign_in.dart';
 import 'package:hour_ain/features/auth/sign_up/views/sign_up.dart';
 import 'package:hour_ain/features/onboarding/on_boarding.dart';
 
-import 'features/home/home_page.dart';
+import 'features/home/views/home_page.dart';
 
 void main() {
   runApp(const MyApp());

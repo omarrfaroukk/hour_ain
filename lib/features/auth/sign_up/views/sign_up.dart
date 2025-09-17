@@ -52,7 +52,7 @@ class _SignUpState extends State<SignUp> {
                         height: 200,
                       ),
                       Container(
-                        height: 600,
+                        height: 650,
                         width: 360,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
@@ -165,7 +165,17 @@ class _SignUpState extends State<SignUp> {
                                 CustomTextfield(
                                   mycontroller: _confirmpasswordcont,
                                   label: "Confirm Password: ",
+                                  val: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Please confirm your password";
+                                    }
+                                    if (value != _passwordcont.text) {
+                                      return "Passwords do not match";
+                                    }
+                                    return null;
+                                  },
                                 ),
+                                SizedBox(height: 20),
                                 BlocListener<SignUpCubit, SignUpState>(
                                   listener: (context, state) {
                                     if (state is SignUpSuccessful) {

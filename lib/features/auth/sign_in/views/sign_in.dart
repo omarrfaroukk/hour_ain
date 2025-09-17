@@ -49,7 +49,7 @@ class _SignInState extends State<SignIn> {
                       height: 200,
                     ),
                     Container(
-                      height: 400,
+                      height: 450,
                       width: 360,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
@@ -60,6 +60,11 @@ class _SignInState extends State<SignIn> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
+                            Text("First time using the app?, sign up now!",
+                                style: AppTypography.body2
+                                    .merge(GoogleFonts.poppins().copyWith(
+                                      color: AppColors.primaryColor,
+                                    ))),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
@@ -69,7 +74,6 @@ class _SignInState extends State<SignIn> {
                                     txt: "Sign In",
                                     bgcolor: AppColors.primaryColor,
                                     txtColor: Colors.white,
-                                    
                                   ),
                                 ),
                                 GestureDetector(
@@ -85,7 +89,6 @@ class _SignInState extends State<SignIn> {
                                       bgcolor: AppColors.whiteColor,
                                       txtColor: AppColors.primaryColor,
                                       txt: "Sign Up",
-                                     
                                     ),
                                   ),
                                 ),
@@ -103,9 +106,11 @@ class _SignInState extends State<SignIn> {
                               onTap: () {},
                               child: Text(
                                 "Forgot password? ",
-                                style: AppTypography.caption1.copyWith(
-                                  decoration: TextDecoration.underline,
-                                ).merge(GoogleFonts.poppins()),
+                                style: AppTypography.caption1
+                                    .copyWith(
+                                      decoration: TextDecoration.underline,
+                                    )
+                                    .merge(GoogleFonts.poppins()),
                               ),
                             ),
                             BlocListener<SignInCubit, SignInState>(
@@ -117,9 +122,11 @@ class _SignInState extends State<SignIn> {
                                   );
                                 }
                               },
-                              child: Builder( // Added Builder to wrap the state-based widget
+                              child: Builder(
+                                // Added Builder to wrap the state-based widget
                                 builder: (context) {
-                                  final state = context.watch<SignInCubit>().state;
+                                  final state =
+                                      context.watch<SignInCubit>().state;
                                   if (state is SignInInitial) {
                                     return JoinButton(
                                       ontap: () {
@@ -131,7 +138,8 @@ class _SignInState extends State<SignIn> {
                                       ch: Center(
                                         child: Text(
                                           "Sign In",
-                                          style: AppTypography.body1.merge(GoogleFonts.poppins()),
+                                          style: AppTypography.body1
+                                              .merge(GoogleFonts.poppins()),
                                         ),
                                       ),
                                     );
@@ -149,7 +157,8 @@ class _SignInState extends State<SignIn> {
                                     ch: Center(
                                       child: Text(
                                         "Sign In",
-                                        style: AppTypography.body1.merge(GoogleFonts.poppins()),
+                                        style: AppTypography.body1
+                                            .merge(GoogleFonts.poppins()),
                                       ),
                                     ),
                                   );
