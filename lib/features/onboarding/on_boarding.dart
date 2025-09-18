@@ -46,7 +46,7 @@ class OnBoarding extends StatelessWidget {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: AppColors.buttonColor,
+                      color: AppColors.primaryColorTrans,
                     ),
                     child: Center(
                       child: Text("Let's start", style: AppTypography.title2),

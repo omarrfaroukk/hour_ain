@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hour_ain/core/constants/app_colors.dart';
-import 'package:hour_ain/core/constants/app_typography.dart';
 
 class JoinButton extends StatefulWidget {
   const JoinButton({super.key,  required this.ch,required this.ontap});

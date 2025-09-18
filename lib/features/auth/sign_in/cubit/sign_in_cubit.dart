@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:hour_ain/features/auth/sign_in/cubit/sign_in_state.dart';
-import 'package:hour_ain/features/auth/sign_in/views/sign_in.dart';
 
 class SignInCubit extends Cubit<SignInState> {
   SignInCubit() : super(SignInInitial());
